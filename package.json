@@ -1,0 +1,26 @@
+{
+  "name": "cleanblog",
+  "version": "1.0.0",
+  "description": "Clean Blog Projesi Baslangic",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaya-hasan/CleanBlog.git"
+  },
+  "keywords": [
+    "clean",
+    "blog"
+  ],
+  "author": "Hasan KAYA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaya-hasan/CleanBlog/issues"
+  },
+  "homepage": "https://github.com/kaya-hasan/CleanBlog#readme",
+  "devDependencies": {
+    "prettier": "2.8.4"
+  }
+}
