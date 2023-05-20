@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "nodemon": "^2.0.22",
     "prettier": "2.8.8"
   },
   "name": "cleanblog",
@@ -7,7 +8,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/kaya-hasan/CleanBlog/issues"
   },
-  "homepage": "https://github.com/kaya-hasan/CleanBlog#readme"
+  "homepage": "https://github.com/kaya-hasan/CleanBlog#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
