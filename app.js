@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
   });
 });
 
-const blogId = '646e00d6c043d5e9b39a735c';
+/*const blogId = '646e00d6c043d5e9b39a735c';
 Blog.findByIdAndUpdate(blogId, {
   title: 'Blog Title 3',
   description: 'Blog description 3 lorem ipsum ',
@@ -33,7 +33,7 @@ Blog.findByIdAndUpdate(blogId, {
   })
   .catch((err) => {
     console.log(err);
-  });
+  });*/
 
 app.get('/about', (req, res) => {
   res.render('about');
