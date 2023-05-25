@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const ejs = require('ejs');
 const path = require('path');
-const Blog = require('./models/Blog');
+const Post = require('./models/Post');
 const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/cleanblog-test-db');
@@ -17,10 +17,39 @@ app.use(express.json());
 
 //ROUTES
 app.get('/', async (req, res) => {
-  const blogs = await Blog.find({});
+  const posts = await Post.find({});
   res.render('index', {
-    blogs,
+    posts,
   });
+});
+
+app.get('/posts/:id', async (req, res) => {
+  //console.log(req.params.id);
+  //res.render('about');
+  const post = await Post.findById(req.params.id);
+  res.render('post', {
+    post,
+  });
+});
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+app.get('/add_post', (req, res) => {
+  res.render('add_post');
+});
+app.get('/post', (req, res) => {
+  res.render('post');
+});
+
+app.post('/posts', async (req, res) => {
+  await Post.create(req.body);
+  res.redirect('/');
+});
+
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Sunucu ${port} portunda baslatildi`);
 });
 
 /*const blogId = '646e00d6c043d5e9b39a735c';
@@ -34,24 +63,3 @@ Blog.findByIdAndUpdate(blogId, {
   .catch((err) => {
     console.log(err);
   });*/
-
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-app.get('/add_post', (req, res) => {
-  res.render('add_post');
-});
-app.get('/post', (req, res) => {
-  res.render('post');
-});
-
-app.post('/blogs', async (req, res) => {
-  await Blog.create(req.body);
-  res.redirect('/');
-});
-
-const port = 3000;
-
-app.listen(port, () => {
-  console.log(`Sunucu ${port} portunda baslatildi`);
-});

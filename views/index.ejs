@@ -25,18 +25,16 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-          <% for(let i = 0; i < blogs.length; i++) { %>
-          <a href="post.html">
+          <% for(let i = 0; i < posts.length; i++) { %>
+          <a href="/posts/<%=posts[i]._id %>">
             <h2 class="post-title">
-              <%=blogs[i].title %>
+              <%=posts[i].title %>
             </h2>
             <h3 class="post-subtitle">
-              <%=blogs[i].description %>
+              <%=posts[i].description %>
             </h3>
           </a>
-          <!-- <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p> -->
+          <%=posts[i].dateCreated %>
             <% } %>
         </div>
         
