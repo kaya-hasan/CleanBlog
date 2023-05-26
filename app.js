@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+const methodOverride = require('method-override');
 
 const ejs = require('ejs');
 const path = require('path');
@@ -17,6 +18,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(fileUpload());
+app.use(methodOverride('_method'));
 
 //ROUTES
 app.get('/', async (req, res) => {
@@ -64,6 +66,22 @@ app.post('/posts', async (req, res) => {
     });
     res.redirect('/');
   });
+});
+
+app.get('/posts/edit/:id', async (req, res) => {
+  const post = await Post.findOne({ _id: req.params.id });
+  res.render('edit', {
+    post,
+  });
+});
+
+app.put('/posts/:id', async (req, res) => {
+  const post = await Post.findOne({ _id: req.params.id });
+  post.title = req.body.title;
+  post.description = req.body.description;
+  post.save();
+
+  res.redirect(`/posts/${req.params.id}`);
 });
 
 const port = 3000;
