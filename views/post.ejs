@@ -41,7 +41,8 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <p class="mb-4"><%= post.description %>
+          <p class="mb-4">
+            <%= post.description %>
             <!-- Never in all their history have men been able truly to conceive of
             the world as one: a single sphere, a globe, having the qualities of
             a globe, a round earth in which all the directions eventually meet,
@@ -137,24 +138,27 @@
           </p>
 
           <p> -->
-            <!-- Placeholder text by -->
-            <!-- <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
+          <!-- Placeholder text by -->
+          <!-- <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
             <a href="https://www.flickr.com/photos/nasacommons/"
               >NASA on The Commons</a -->
-            
-          </p>
         </div>
         <div class="tm-bg-gray tm-share-box">
           <div class="text-center">
-            <a href="/posts/edit/<%= post._id %>" class="btn btn-primary p-0 mb-4 tm-btn-animate tm-btn-download tm-icon-download" ><span>Update Details</span>
+            <a
+              href="/posts/edit/<%= post._id %>"
+              class="btn btn-primary p-0 mb-4 tm-btn-animate tm-btn-download tm-icon-download"
+              ><span>Update Details</span>
             </a>
           </div>
           <div class="text-center">
-            <button
+            <a
+              href="/posts/<%= post._id %>?_method=DELETE"
               class="btn btn-danger p-0 tm-btn-animate tm-btn-download tm-icon-download"
+              onclick="return confirm('Are you sure?')"
             >
-              <span>Delete Photo</span>
-            </button>
+              <span>Delete Post</span>
+            </a>
           </div>
         </div>
       </div>
