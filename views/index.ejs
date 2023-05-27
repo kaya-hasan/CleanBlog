@@ -1,15 +1,12 @@
 <%- include('partials/_header') -%>
 
 <body>
-
   <!-- Navigation -->
-  
+
   <%- include('partials/_navigation') -%>
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-    <div class="overlay">
-      
-    </div>
+    <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -29,28 +26,47 @@
         <div class="post-preview">
           <% for(let i = 0; i < posts.length; i++) { %>
           <a href="/posts/<%=posts[i]._id %>">
-            <h2 class="post-title">
-              <%=posts[i].title %>
-            </h2>
+            <h2 class="post-title"><%=posts[i].title %></h2>
             <h3 class="post-subtitle">
               <!-- <%=posts[i].description %> -->
             </h3>
-            
           </a>
-          <%=posts[i].dateCreated %>
-            <% } %>
+          <%=posts[i].dateCreated %> <% } %>
         </div>
-        
-        <hr>
+
+        <hr />
         <!-- Pager -->
         <div class="clearfix">
           <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+        <div>
+          <% if(pages > 0) { %>
+          <ul class="nav tm-paging-links">
+            <% for(i=1 ; i <= pages; i++) { %> <% if (i === current) { %>
+            <li class="nav-item-active">
+              <a href="/?page=<%= i %>" class="nav-link tm-paging-link"
+                ><%= i %></a
+              >
+            </li>
+            <% } else if(i < pages){ %>
+            <li class="nav-item">
+              <a href="/?page=<%= i %>" class="nav-link tm-paging-link"
+                ><%= i %></a
+              >
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+              <a href="/?page=<%= i %>" class="nav-link tm-paging-link"> > </a>
+            </li>
+            <% } %> <% } %>
+          </ul>
+          <% } %>
         </div>
       </div>
     </div>
   </div>
 
-  <hr>
+  <hr />
 
   <!-- Footer -->
   <%- include('partials/_footer') -%>
@@ -61,7 +77,4 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
-
 </body>
-
-</html>
