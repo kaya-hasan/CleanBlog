@@ -8,6 +8,8 @@ const path = require('path');
 const Post = require('./models/Post');
 const fs = require('fs');
 const app = express();
+const postController = require('./controllers/postControllers');
+const pageController = require('./controllers/pageControllers');
 
 mongoose.connect('mongodb://127.0.0.1:27017/cleanblog-test-db');
 //TEMPLATES ENGINE
@@ -25,76 +27,18 @@ app.use(
 );
 
 //ROUTES
-app.get('/', async (req, res) => {
-  const posts = await Post.find({}).sort('-dateCreated');
-  res.render('index', {
-    posts,
-  });
-});
+app.get('/', postController.getAllPosts);
+app.get('/posts/:id', postController.getPost);
+app.post('/posts', postController.createPost);
+app.put('/posts/:id', postController.updatePost);
+app.delete('/posts/:id', postController.deletePost);
 
-app.get('/posts/:id', async (req, res) => {
-  //console.log(req.params.id);
-  //res.render('about');
-  const post = await Post.findById(req.params.id);
-  res.render('post', {
-    post,
-  });
-});
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-app.get('/add_post', (req, res) => {
-  res.render('add_post');
-});
-app.get('/post', (req, res) => {
-  res.render('post');
-});
+app.get('/about', pageController.getAboutPage);
+app.get('/add_post', pageController.getAddPage);
+app.get('/posts/edit/:id', pageController.getEditPage);
 
-app.post('/posts', async (req, res) => {
-  //console.log(req.files.image);
-  //await Post.create(req.body);
-  //res.redirect('/');
 
-  const uploadDir = 'public/uploads';
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-  }
 
-  let uploadedImage = req.files.image;
-  let uploadPath = __dirname + '/public/uploads/' + uploadedImage.name;
-
-  uploadedImage.mv(uploadPath, async () => {
-    await Post.create({
-      ...req.body,
-      image: '/uploads/' + uploadedImage.name,
-    });
-    res.redirect('/');
-  });
-});
-
-app.get('/posts/edit/:id', async (req, res) => {
-  const post = await Post.findOne({ _id: req.params.id });
-  res.render('edit', {
-    post,
-  });
-});
-
-app.put('/posts/:id', async (req, res) => {
-  const post = await Post.findOne({ _id: req.params.id });
-  post.title = req.body.title;
-  post.description = req.body.description;
-  post.save();
-
-  res.redirect(`/posts/${req.params.id}`);
-});
-
-app.delete('/posts/:id', async (req, res) => {
-  const post = await Post.findOne({ _id: req.params.id });
-  let deletedImage = __dirname + '/public' + post.image;
-  fs.unlinkSync(deletedImage);
-  await Post.findByIdAndRemove(req.params.id);
-  res.redirect('/');
-});
 
 const port = 3000;
 
