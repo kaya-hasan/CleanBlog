@@ -13,7 +13,7 @@ const pageController = require('./controllers/pageControllers');
 
 mongoose
   .connect(
-    'mongodb+srv://h3kaya:sx2DKLMPuuFmLQ2i@cleanblogcluster.is2338f.mongodb.net/?retryWrites=true&w=majority'
+    'mongodb+srv://h3kaya5:sFFJPHhWB9hXw4xF@cluster0.r7gcfdi.mongodb.net/?retryWrites=true&w=majority'
   )
   .then(() => {
     console.log('DB CONNECTED !');
